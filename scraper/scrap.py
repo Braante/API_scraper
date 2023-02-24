@@ -1,4 +1,4 @@
-import requests, json, time
+import requests, json, threading
 from datetime import date
 from bs4 import BeautifulSoup
 
@@ -10,9 +10,7 @@ response = requests.get(url, headers=userAgent)
 soup = BeautifulSoup(response.text, 'html.parser')
 nbpagemax = soup.find_all('a',{"class":"page_num"})
 
-for numpage in range(int(nbpagemax[-1].text)+1):
-    time.sleep(1)
-
+def scrap_page(numpage):
     url = 'https://www.metacritic.com/browse/games/score/metascore/all/all/filtered?page='+str(numpage)
     response = requests.get(url, headers=userAgent)
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -41,8 +39,16 @@ for numpage in range(int(nbpagemax[-1].text)+1):
                 res_arr.append(temp)     
         tblnum += 1
 
-print(len(res_arr))
+threads = []
+for numpage in range(int(nbpagemax[-1].text)+1):
+    threads.append(threading.Thread(target=scrap_page,args=(numpage,)))
+    threads[-1].start()
+
+for t in threads:
+    t.join()
+
+#print(len(res_arr))
 resultat = {"games":res_arr}
-save_file = open(date.today().strftime("%m_%d_%y")+"_data.json", "w")  
+save_file = open("./scraper/"+date.today().strftime("%m_%d_%y")+"_data.json", "w")  
 json.dump(resultat, save_file)  
 save_file.close()
