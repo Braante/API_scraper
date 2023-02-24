@@ -50,3 +50,16 @@ success
 success
 ```
 
+- connection to MongoDB
+```
+[brante@MongoDB ~]$ mongosh --host 127.0.0.1 --port 27017 --authenticationDatabase "admin" -u "root" -p
+Enter password: *****
+Current Mongosh Log ID:	63f8853f723fcfff7736a803
+Connecting to:		mongodb://<credentials>@127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&authSource=admin&appName=mongosh+1.6.2
+Using MongoDB:		6.0.4
+Using Mongosh:		1.6.2
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+test> 
+```
