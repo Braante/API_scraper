@@ -1,6 +1,14 @@
-import requests, json, threading, os
-from datetime import date
+import requests, json, threading, os, logging
+from datetime import date,datetime
 from bs4 import BeautifulSoup
+
+path = "./scraper/log/"
+if not os.path.exists(path):
+    os.makedirs(path)
+
+log_format = '%(asctime)s %(filename)s: %(message)s'
+logging.basicConfig(filename=path+(datetime.now()).strftime("%m_%d_%Y_%H%M%S")+'.log', encoding='utf-8',format=log_format, level=logging.DEBUG)
+logging.info('Running scrapt.py')
 
 res_arr = []
 
@@ -39,19 +47,28 @@ def scrap_page(numpage):
                 res_arr.append(temp)     
         tblnum += 1
 
+logging.info('Start Multithread Scraping')
 threads = []
-for numpage in range(int(nbpagemax[-1].text)+1):
-    threads.append(threading.Thread(target=scrap_page,args=(numpage,)))
-    threads[-1].start()
+try:
+    for numpage in range(int(nbpagemax[-1].text)+1):
+        threads.append(threading.Thread(target=scrap_page,args=(numpage,)))
+        threads[-1].start()
+except:
+    logging.exception('Scraping page function doesnt work properly')
 
 for t in threads:
     t.join()
 
 #print(len(res_arr))
-resultat = {"games":res_arr}
-path = "./scraper/scraper_data/"
-if not os.path.exists(path):
-    os.makedirs(path)
-save_file = open(path+date.today().strftime("%m_%d_%y")+"_data.json", "w")  
-json.dump(resultat, save_file)  
-save_file.close()
+try:
+    resultat = {"games":res_arr}
+    path = "./scraper/scraper_data/"
+    logging.info('Save in json file')
+    if not os.path.exists(path):
+        os.makedirs(path)
+    save_file = open(path+date.today().strftime("%m_%d_%y")+"_data.json", "w")  
+    json.dump(resultat, save_file)  
+    save_file.close()
+except:
+    logging.exception('Data not saved properly')
+logging.info('End of script')
