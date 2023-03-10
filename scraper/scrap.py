@@ -2,7 +2,7 @@ import requests, json, threading, os, logging
 from datetime import date,datetime
 from bs4 import BeautifulSoup
 
-path = "./scraper/log/"
+path = "./log/"
 if not os.path.exists(path):
     os.makedirs(path)
 
@@ -62,7 +62,7 @@ for t in threads:
 #print(len(res_arr))
 try:
     resultat = {"games":res_arr}
-    path = "./scraper/scraper_data/"
+    path = ".//scraper_data/"
     logging.info('Save in json file')
     if not os.path.exists(path):
         os.makedirs(path)
