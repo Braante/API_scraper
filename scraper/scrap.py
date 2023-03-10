@@ -1,4 +1,4 @@
-import requests, json, threading
+import requests, json, threading, os
 from datetime import date
 from bs4 import BeautifulSoup
 
@@ -49,6 +49,9 @@ for t in threads:
 
 #print(len(res_arr))
 resultat = {"games":res_arr}
-save_file = open("./scraper/"+date.today().strftime("%m_%d_%y")+"_data.json", "w")  
+path = "./scraper/scraper_data/"
+if not os.path.exists(path):
+    os.makedirs(path)
+save_file = open(path+date.today().strftime("%m_%d_%y")+"_data.json", "w")  
 json.dump(resultat, save_file)  
 save_file.close()
