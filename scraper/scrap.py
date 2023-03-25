@@ -1,6 +1,8 @@
 import requests, json, threading, os, logging
 from datetime import date,datetime
 from bs4 import BeautifulSoup
+import socket
+import ssl
 
 path = "./log/"
 if not os.path.exists(path):
@@ -59,7 +61,6 @@ except:
 for t in threads:
     t.join()
 
-#print(len(res_arr))
 try:
     resultat = {"games":res_arr}
     path = ".//scraper_data/"
@@ -71,4 +72,26 @@ try:
     save_file.close()
 except:
     logging.exception('Data not saved properly')
+try:
+    with open(save_file, "rb") as f:
+        packet = f.read()
+
+    HOST, PORT = '10.101.1.10', 60000
+
+    # CREATE SOCKET
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.settimeout(10)
+
+    # WRAP SOCKET
+    wrappedSocket = ssl.wrap_socket(sock, ssl_version=ssl.PROTOCOL_TLSv1_2)
+
+    # CONNECT AND PRINT REPLY
+    wrappedSocket.connect((HOST, PORT))
+    wrappedSocket.send(packet)
+
+    # CLOSE SOCKET CONNECTION
+    wrappedSocket.close()
+except:
+    logging.exception('Json file not send properly to MongoDB')
+
 logging.info('End of script')
