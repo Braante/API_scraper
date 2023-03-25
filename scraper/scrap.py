@@ -73,7 +73,7 @@ try:
 except:
     logging.exception('Data not saved properly')
 try:
-    with open(save_file, "rb") as f:
+    with open(path+date.today().strftime("%m_%d_%y")+"_data.json", "rb") as f:
         packet = f.read()
 
     HOST, PORT = '10.101.1.10', 60000
