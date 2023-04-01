@@ -62,13 +62,14 @@ for t in threads:
     t.join()
 
 try:
-    resultat = {"games":res_arr}
+    #resultat = {"games":res_arr}
     path = ".//scraper_data/"
     logging.info('Save in json file')
     if not os.path.exists(path):
         os.makedirs(path)
     save_file = open(path+date.today().strftime("%m_%d_%y")+"_data.json", "w")  
-    json.dump(resultat, save_file)  
+    #json.dump(resultat, save_file)
+    json.dump(res_arr, save_file)
     save_file.close()
 except:
     logging.exception('Data not saved properly')
