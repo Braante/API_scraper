@@ -9,6 +9,10 @@ app.config['MONGO_URI'] = ''
 
 mongo = PyMongo(app)
 
+@app.route('/', methods=['GET'])
+def main():
+    return jsonify({'API for metacritic games':"/help for all possible requests"})
+
 @app.route('/help', methods=['GET'])
 def help():
     return jsonify({'For Your Help' : 
@@ -17,14 +21,13 @@ def help():
                     "/platform/<platform> for game by this platform",
                     "/userscore/<number 0-10> for game by this userscore",
                     "/metascore/<number 0-100> for game by this metascore",
-                    "/date/<date m_d_y> for game by this date",)
+                    "/date/<date m_d_yyyy> for game by this date",)
                     }
                     )
 
 @app.route('/games', methods=['GET'])
 def get_all_games():
     games = mongo.db.listGames
-
     output = []
     for q in games.find():
         try:
@@ -59,11 +62,24 @@ def get_all_games_platform(name):
             output.append("Wrong game data")
     return jsonify({'result' : output})
 
+@app.route('/platform', methods=['GET'])
+def get_all_platform():
+    games = mongo.db.listGames
+
+    output = []
+    for q in games.find():
+        try:
+            output.append({'platform' : q['platform']})
+        except:
+            output.append("Wrong game data")
+    output = list({(d['platform']) for d in output})
+    newlist = sorted(output) 
+    return jsonify({'result' : newlist})
+
 @app.route('/userscore/<name>', methods=['GET'])
 def get_all_games_userscore(name):
     name = str(float(name))
     games = mongo.db.listGames
-
     output = []
     for q in games.find({'userscore': name}):
         try:
@@ -88,7 +104,7 @@ def get_all_games_metascore(name):
 def get_all_games_date(name):
     games = mongo.db.listGames
     try:
-        name = datetime.strptime(name, '%m_%d_%y').strftime("%B %d, %Y")
+        name = datetime.strptime(name, '%m_%d_%Y').strftime("%B %d, %Y")
     except:
         return jsonify({'result' : "Wrong Format date"})
     output = []
@@ -100,4 +116,4 @@ def get_all_games_date(name):
     return jsonify({'result' : output})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True,host="0.0.0.0")
