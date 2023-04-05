@@ -18,7 +18,6 @@
 #  #############################################################################################  #
 
 
-sudo dnf update -y
 
 echo "Quel est le nom de l'utilisateur sur la machine mongoDB ?"
 read nameUserMongoDB
@@ -28,6 +27,7 @@ sudo scp -r ./automatisation/mongodb $nameUserMongoDB@10.101.1.10:/home/$nameUse
 echo "Quel est le nom de l'utilisateur sur la machine scraper ?"
 read nameUserScraper
 sudo scp -r ./automatisation/scraper $nameUserScraper@10.101.1.20:/home/$nameUserScraper/
+sudo scp ./setup_scraper.sh $nameUserScraper@10.101.1.20:/home/$nameUserScraper/
 
 echo "Quel est le nom de l'utilisateur sur la machine backup ?"
 read nameUserBackup
@@ -36,5 +36,6 @@ sudo scp -r ./automatisation/backup $nameUserBackup@10.101.1.30:/home/$nameUserB
 echo "Quel est le nom de l'utilisateur sur la machine API ?"
 read nameUserApi
 sudo scp -r ./automatisation/api $nameUserApi@10.101.1.40:/home/$nameUserApi/
+sudo scp ./setup_api.sh $nameUserApi@10.101.1.40:/home/$nameUserApi
 
 echo "TERMINE!"
