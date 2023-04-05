@@ -1,7 +1,7 @@
 #!/bin/bash
 # 03/04/23
 # This script will install a scraper for MetaCritic games.
-sudo mv /home/hugo/scraper /opt
+sudo mv ~/scraper /opt
 sudo useradd scraper -m -d /opt/scraper -s /usr/bin/nologin
 sudo chgrp -R scraper /opt/scraper
 sudo chown -R scraper /opt/scraper

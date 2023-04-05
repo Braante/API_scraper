@@ -2,7 +2,7 @@
 # 03/04/23
 # This script will install a Flask API using with MongoDB for Metacritic games.
 
-sudo mv /home/hugo/api /opt
+sudo mv ~/api /opt
 sudo useradd api -m -d /opt/api -s /usr/bin/nologin
 sudo chgrp -R api /opt/api
 sudo chown -R api /opt/api
