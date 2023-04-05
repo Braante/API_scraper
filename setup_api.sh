@@ -14,6 +14,7 @@ sudo chmod u+x /opt/api/api.sh
 # Installation des prérequis (python, lib python etc)
 sudo dnf -y install python 
 sudo dnf -y install python3-pip
+sudo curl https://my-netdata.io/kickstart.sh > /tmp/netdata-kickstart.sh && sh /tmp/netdata-kickstart.sh --non-interactive
 sudo -u api pip install Flask
 sudo -u api pip install Flask-PyMongo
 
@@ -22,7 +23,10 @@ sudo  mv /opt/api/api.service /etc/systemd/system
 sudo systemctl daemon-reload
 sudo systemctl start api
 sudo systemctl enable api
+sudo systemctl start netdata
+sudo systemctl enable netdata
 
 # Ajustement du firewall pour accéder à l'API
 sudo firewall-cmd --add-port=5000/tcp --permanent
+sudo firewall-cmd --add-port=19999/tcp --permanent
 sudo firewall-cmd --reload

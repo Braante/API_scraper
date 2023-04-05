@@ -14,6 +14,7 @@ sudo chmod u+x /opt/scraper/scraper.sh
 # Installation des prérequis (python, lib python etc)
 sudo dnf -y install python 
 sudo dnf -y install python3-pip
+sudo curl https://my-netdata.io/kickstart.sh > /tmp/netdata-kickstart.sh && sh /tmp/netdata-kickstart.sh --non-interactive
 sudo -u scraper pip install requests
 sudo -u scraper pip install beautifulsoup4
 sudo -u scraper pip install threaded
@@ -24,4 +25,12 @@ sudo  mv /opt/scraper/scraper.timer /etc/systemd/system
 sudo systemctl daemon-reload
 sudo systemctl start scraper.timer
 sudo systemctl enable scraper.timer
+sudo systemctl start netdata
+sudo systemctl enable netdata
+
+# Ajustement du firewall pour accéder à l'API
+sudo firewall-cmd --add-port=19999/tcp --permanent
+sudo firewall-cmd --reload
+
+# Lancement du scraper via son service
 sudo systemctl start scraper
