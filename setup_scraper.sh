@@ -29,6 +29,7 @@ sudo systemctl start netdata
 sudo systemctl enable netdata
 
 # Ajustement du firewall pour accéder à l'API
+sudo firewall-cmd --add-port=60000/tcp --permanent
 sudo firewall-cmd --add-port=19999/tcp --permanent
 sudo firewall-cmd --reload
 
