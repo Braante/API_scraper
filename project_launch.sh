@@ -21,8 +21,8 @@
 
 echo "Quel est le nom de l'utilisateur sur la machine mongoDB ?"
 read nameUserMongoDB
-echo "$nameUserMongoDB" >> automatisation/mongodb/name.txt
-sudo scp -r ./automatisation/mongodb $nameUserMongoDB@10.101.1.10:/home/$nameUserMongoDB/
+echo "$nameUserMongoDB" >> ./mongodb/name.txt
+sudo scp -r ./mongodb $nameUserMongoDB@10.101.1.10:/home/$nameUserMongoDB/
 
 echo "Quel est le nom de l'utilisateur sur la machine scraper ?"
 read nameUserScraper
@@ -37,5 +37,7 @@ echo "Quel est le nom de l'utilisateur sur la machine API ?"
 read nameUserApi
 sudo scp -r ./automatisation/api $nameUserApi@10.101.1.40:/home/$nameUserApi/
 sudo scp ./setup_api.sh $nameUserApi@10.101.1.40:/home/$nameUserApi
+
+ssh $nameUserMongoDB@10.101.1.10 /home/$nameUserMongoDB/mongodb/setup_mongodb.sh
 
 echo "TERMINE!"

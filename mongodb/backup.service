@@ -1,0 +1,10 @@
+[Unit]
+Description=Execute backup.sh
+
+[Service]
+ExecStart=/opt/backup/backup.sh
+Type=oneshot
+User=mongodb
+
+[Install]
+WantedBy=multi-user.target

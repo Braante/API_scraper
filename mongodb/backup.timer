@@ -1,0 +1,10 @@
+[Unit]
+Description=launch the backup script
+
+[Timer]
+OnCalendar=*-*-* 5:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+
