@@ -1,0 +1,9 @@
+[Unit]
+Description=Execute api.sh
+
+[Service]
+ExecStart=/opt/api/api.sh
+User=api
+
+[Install]
+WantedBy=multi-user.target

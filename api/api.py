@@ -5,7 +5,7 @@ from datetime import datetime
 app = Flask(__name__)
 
 app.config['MONGO_DBNAME'] = 'scraper'
-app.config['MONGO_URI'] = ''
+app.config['MONGO_URI'] = 'mongodb://user-scraper:azerty@10.101.1.10:27017/scraper'
 
 mongo = PyMongo(app)
 

@@ -1,0 +1,10 @@
+[Unit]
+Description=Execute scraper.sh
+
+[Service]
+ExecStart=/opt/scraper/scraper.sh
+Type=oneshot
+User=scraper
+
+[Install]
+WantedBy=multi-user.target
