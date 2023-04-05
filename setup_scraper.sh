@@ -1,18 +1,27 @@
 #!/bin/bash
 # 03/04/23
 # This script will install a scraper for MetaCritic games.
+
+# Déplacement des fichiers nécessaires dans un endroit autre que le home de l'utilisateur
 sudo mv ~/scraper /opt
+
+# Création de l'utilisateur qui servira au scraper et changement des droits des fichiers en fonction
 sudo useradd scraper -m -d /opt/scraper -s /usr/bin/nologin
 sudo chgrp -R scraper /opt/scraper
 sudo chown -R scraper /opt/scraper
 sudo chmod u+x /opt/scraper/scraper.sh
+
+# Installation des prérequis (python, lib python etc)
 sudo dnf -y install python 
 sudo dnf -y install python3-pip
 sudo -u scraper pip install requests
 sudo -u scraper pip install beautifulsoup4
 sudo -u scraper pip install threaded
+
+# Déplacement et lancement du service et timer
 sudo  mv /opt/scraper/scraper.service /etc/systemd/system
 sudo  mv /opt/scraper/scraper.timer /etc/systemd/system
 sudo systemctl daemon-reload
 sudo systemctl start scraper.timer
 sudo systemctl enable scraper.timer
+sudo systemctl start scraper
