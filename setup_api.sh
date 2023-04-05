@@ -22,3 +22,7 @@ sudo  mv /opt/api/api.service /etc/systemd/system
 sudo systemctl daemon-reload
 sudo systemctl start api
 sudo systemctl enable api
+
+# Ajustement du firewall pour accéder à l'API
+sudo firewall-cmd --add-port=5000/tcp --permanent
+sudo firewall-cmd --reload
