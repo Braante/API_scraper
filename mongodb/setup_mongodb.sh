@@ -9,9 +9,12 @@ sudo yum install -y mongodb-org
 # running the service & enable it
 sudo systemctl start mongod
 sudo systemctl enable mongod
+#sudo systemctl stop mongod
 
-sudo rm -r /etc/mongod.conf
+#sudo rm -r /etc/mongod.conf
 sudo mv ~/mongodb/mongod.conf /etc/
+
+#sudo systemctl start mongod
 
 # création de l'utilisateur
 sudo useradd mongodb -s /usr/bin/nologin
@@ -19,4 +22,6 @@ sudo useradd mongodb -s /usr/bin/nologin
 # /up/  PARFAIT ! /up/
 
 mongosh < ~/mongodb/mongo.js
+
+sh ~/mongodb/import_data.sh
 
