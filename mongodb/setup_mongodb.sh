@@ -21,8 +21,11 @@ sudo chgrp -R mongodb /opt/mongodb
 sudo chown -R mongodb /opt/mongodb
 sudo chmod u+x /opt/mongodb/import_data.sh
 
-sudo  mv ~/mongodb.service /etc/systemd/system
-sudo  mv ~/mongodb.timer /etc/systemd/system
+sudo  mv ~/mongodb/mongodb.service /etc/systemd/system
+sudo  mv ~/mongodb/mongodb.timer /etc/systemd/system
+sudo systemctl start mongodb.timer
+sudo systemctl enable mongodb.timer
+sudo systemctl daemon-reload
 
 # /up/  PARFAIT ! /up/
 

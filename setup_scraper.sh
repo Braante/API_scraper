@@ -32,9 +32,11 @@ sudo systemctl enable netdata
 sudo firewall-cmd --add-port=19999/tcp --permanent
 sudo firewall-cmd --reload
 
+nameUserMongoDB=`cat ~/name.txt`
+echo $nameUserMongoDB
+
 # Lancement du scraper via son service
 sudo systemctl start scraper
 
-nameUserMongoDB=`cat ~/name.txt`
 current_date=$(date +"%m_%d_%y_data.json")
 sudo scp -r /opt/scraper/$current_date $nameUserMongoDB@10.101.1.10:/home/$nameUserMongoDB/mongodb

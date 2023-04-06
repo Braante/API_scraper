@@ -16,7 +16,7 @@ def deal_with_client(connstream):
         result += str(data)
         data = connstream.recv(1024)
     correctData = result[2:-1]
-    file = open("./mongodb/"+date.today().strftime("%m_%d_%y")+"_data.json", "w")
+    file = open("/opt/mongodb/"+date.today().strftime("%m_%d_%y")+"_data.json", "w")
     file.write(correctData)
     file.close()
     sys.exit()
