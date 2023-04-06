@@ -1,8 +1,8 @@
-import socket, ssl
+import socket, ssl, sys
 from datetime import date,datetime
 
 context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
-context.load_cert_chain(certfile="~/mongodb/certificate.pem", keyfile="~/mongodb/key.pem")
+context.load_cert_chain(certfile="./mongodb/certificate.pem", keyfile="./mongodb/key.pem")
 
 bindsocket = socket.socket()
 bindsocket.bind(('10.101.1.10', 60000))
@@ -16,9 +16,10 @@ def deal_with_client(connstream):
         result += str(data)
         data = connstream.recv(1024)
     correctData = result[2:-1]
-    file = open("~/mongodb/"+date.today().strftime("%m%d%y")+"_data.json", "w")
+    file = open("./mongodb/"+date.today().strftime("%m_%d_%y")+"_data.json", "w")
     file.write(correctData)
     file.close()
+    sys.exit()
 
 while True:
     newsocket, fromaddr = bindsocket.accept()
