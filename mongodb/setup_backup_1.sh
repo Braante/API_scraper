@@ -11,21 +11,21 @@ sudo dnf install borgbackup -y
 name=`cat ~/mongodb/name_backup.txt`
 
 # configuration de l'environnement de sauvegarde à distance sur la machine en question
-borg init --encryption=none $name@10.101.1.30:/home/$name/backup
+borg init --encryption=none $name@10.101.1.30:/home/$name/backup_data
 
 # gestion des droits sur les nouveaux fichiers
-sudo chown mongodb ~/mongdb/backup.service
-sudo chgrp mongodb ~/mongdb/backup.service
-sudo chown mongodb ~/mongdb/backup.timer
-sudo chgrp mongodb ~/mongdb/backup.timer
-sudo chown mongodb ~/mongdb/backup.sh
-sudo chgrp mongodb ~/mongdb/backup.sh
+sudo chown mongodb ~/mongodb/backup.service
+sudo chgrp mongodb ~/mongodb/backup.service
+sudo chown mongodb ~/mongodb/backup.timer
+sudo chgrp mongodb ~/mongodb/backup.timer
+sudo chown mongodb ~/mongodb/backup.sh
+sudo chgrp mongodb ~/mongodb/backup.sh
 
 # déplacement du service, du timer et du script
-sudo mv ~/mongdb/backup.service /etc/systemd/system/
-sudo mv ~/mongdb/backup.timer /etc/systemd/system/
+sudo mv ~/mongodb/backup.service /etc/systemd/system/
+sudo mv ~/mongodb/backup.timer /etc/systemd/system/
 sudo mkdir /opt/backup
-sudo mv ~/mongdb/backup.sh /opt/backup/
+sudo mv ~/mongodb/backup.sh /opt/backup/
 
 # activation (aussi dès le démarrage) du service et du timer
 sudo systemctl start backup.timer
