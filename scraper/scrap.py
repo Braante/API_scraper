@@ -93,6 +93,6 @@ try:
     # CLOSE SOCKET CONNECTION
     wrappedSocket.close()
 except:
-    logging.exception('Json file not send properly to MongoDB')
+    logging.exception('Json file not send properly to MongoDB via TLS tunnel')
 
 logging.info('End of script')

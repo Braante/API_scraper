@@ -2,7 +2,7 @@
 # script that import data from the scraper into the database in MongoDB
 
 
-python ~/mongodb/ssl_client.py
+python /opt/mongodb/ssl_client.py
 current_date=$(date +"%m_%d_%y_data.json")
 echo "$current_date"
-mongoimport --host localhost -u mongoadmin -p azerty --authenticationDatabase admin --db scraper --collection listGames --file ~/mongodb/$current_date --jsonArray
+mongoimport --host localhost -u mongoadmin -p azerty --authenticationDatabase admin --db scraper --collection listGames --file /opt/mongodb/$current_date --jsonArray

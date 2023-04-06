@@ -16,7 +16,13 @@ sudo systemctl enable mongod
 sudo mv ~/mongodb/mongod.conf /etc/
 
 # création de l'utilisateur
-sudo useradd mongodb -s /usr/bin/nologin
+sudo useradd mongodb -m -d /opt/mongodb -s /usr/bin/nologin
+sudo chgrp -R mongodb /opt/mongodb
+sudo chown -R mongodb /opt/mongodb
+sudo chmod u+x /opt/mongodb/import_data.sh
+
+sudo  mv ~/mongodb.service /etc/systemd/system
+sudo  mv ~/mongodb.timer /etc/systemd/system
 
 # /up/  PARFAIT ! /up/
 
@@ -28,6 +34,3 @@ sudo systemctl enable netdata
 sudo firewall-cmd --add-port=19999/tcp --permanent
 sudo firewall-cmd --add-port=60000/tcp --permanent
 sudo firewall-cmd --reload
-
-sh ~/mongodb/import_data.sh
-

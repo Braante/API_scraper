@@ -1,0 +1,10 @@
+[Unit]
+Description=Execute import_data.sh
+
+[Service]
+ExecStart=/opt/mongodb/import_data.sh
+Type=oneshot
+User=mongodb
+
+[Install]
+WantedBy=multi-user.target
