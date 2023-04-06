@@ -33,6 +33,7 @@ sudo scp ./mongodb/name.txt $nameUserScraper@10.101.1.20:/home/$nameUserScraper/
 # echo "Quel est le nom de l'utilisateur sur la machine backup ?"
 # read nameUserBackup
 echo "$nameUserBackup" > ./backup/name.txt
+echo "$nameUserBackup" > ./mongodb/name_backup.txt
 # sudo scp -r ./backup $nameUserBackup@10.101.1.30:/home/$nameUserBackup/
 
 # echo "Quel est le nom de l'utilisateur sur la machine API ?"
