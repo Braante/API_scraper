@@ -32,6 +32,7 @@ sudo scp ./mongodb/name.txt $nameUserScraper@10.101.1.20:/home/$nameUserScraper/
 
 # echo "Quel est le nom de l'utilisateur sur la machine backup ?"
 # read nameUserBackup
+echo "$nameUserBackup" > ./backup/name.txt
 # sudo scp -r ./backup $nameUserBackup@10.101.1.30:/home/$nameUserBackup/
 
 # echo "Quel est le nom de l'utilisateur sur la machine API ?"
@@ -41,8 +42,8 @@ sudo scp ./mongodb/name.txt $nameUserScraper@10.101.1.20:/home/$nameUserScraper/
 
 ssh -t $nameUserMongoDB@10.101.1.10 "sh /home/$nameUserMongoDB/mongodb/setup_mongodb.sh"
 ssh -t $nameUserScraper@10.101.1.20 "sh /home/$nameUserScraper/setup_scraper.sh"
-#ssh -t $nameUserBackup@10.101.1.30 "sh /home/$nameUserBackup/backup/setup_backup_2.sh"
-#ssh -t $nameUserMongoDB@10.101.1.10 "sh /home/$nameUserMongoDB/mongodb/setup_backup_1.sh"
+ssh -t $nameUserBackup@10.101.1.30 "sh /home/$nameUserBackup/backup/setup_backup_2.sh"
+ssh -t $nameUserMongoDB@10.101.1.10 "sh /home/$nameUserMongoDB/mongodb/setup_backup_1.sh"
 #ssh -t $nameUserApi@10.101.1.40 "sh /home/$nameUserApi/setup_api.sh"
 
 echo "TERMINE!"
