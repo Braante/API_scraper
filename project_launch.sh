@@ -22,19 +22,19 @@
 echo "Quel est le nom de l'utilisateur sur la machine mongoDB ?"
 read nameUserMongoDB
 echo "$nameUserMongoDB" > ./mongodb/name.txt
+echo "Quel est le nom de l'utilisateur sur la machine backup ?"
+read nameUserBackup
+echo "$nameUserBackup" > ./mongodb/name_backup.txt
 sudo scp -r ./mongodb $nameUserMongoDB@10.101.1.10:/home/$nameUserMongoDB/
 
-echo "Quel est le nom de l'utilisateur sur la machine scraper ?"
-read nameUserScraper
-sudo scp -r ./scraper $nameUserScraper@10.101.1.20:/home/$nameUserScraper/
-sudo scp ./setup_scraper.sh $nameUserScraper@10.101.1.20:/home/$nameUserScraper/
-sudo scp ./mongodb/name.txt $nameUserScraper@10.101.1.20:/home/$nameUserScraper/
+# echo "Quel est le nom de l'utilisateur sur la machine scraper ?"
+# read nameUserScraper
+# sudo scp -r ./scraper $nameUserScraper@10.101.1.20:/home/$nameUserScraper/
+# sudo scp ./setup_scraper.sh $nameUserScraper@10.101.1.20:/home/$nameUserScraper/
+# sudo scp ./mongodb/name.txt $nameUserScraper@10.101.1.20:/home/$nameUserScraper/
 
-# echo "Quel est le nom de l'utilisateur sur la machine backup ?"
-# read nameUserBackup
 echo "$nameUserBackup" > ./backup/name.txt
-echo "$nameUserBackup" > ./mongodb/name_backup.txt
-# sudo scp -r ./backup $nameUserBackup@10.101.1.30:/home/$nameUserBackup/
+sudo scp -r ./backup $nameUserBackup@10.101.1.30:/home/$nameUserBackup/
 
 # echo "Quel est le nom de l'utilisateur sur la machine API ?"
 # read nameUserApi
@@ -42,7 +42,7 @@ echo "$nameUserBackup" > ./mongodb/name_backup.txt
 # sudo scp ./setup_api.sh $nameUserApi@10.101.1.40:/home/$nameUserApi
 
 ssh -t $nameUserMongoDB@10.101.1.10 "sh /home/$nameUserMongoDB/mongodb/setup_mongodb.sh"
-ssh -t $nameUserScraper@10.101.1.20 "sh /home/$nameUserScraper/setup_scraper.sh"
+# ssh -t $nameUserScraper@10.101.1.20 "sh /home/$nameUserScraper/setup_scraper.sh"
 ssh -t $nameUserBackup@10.101.1.30 "sh /home/$nameUserBackup/backup/setup_backup_2.sh"
 ssh -t $nameUserMongoDB@10.101.1.10 "sh /home/$nameUserMongoDB/mongodb/setup_backup_1.sh"
 #ssh -t $nameUserApi@10.101.1.40 "sh /home/$nameUserApi/setup_api.sh"
