@@ -1,9 +1,6 @@
 #!/bin/bash
 # Ce script met en place la solution pour la sauvegarde sur la machine MongoDB
 
-# mise à jour des paquets de la machine 
-sudo dnf update -y
-
 # installation du paquet epel-release au cas où il ne soit pas installer
 sudo dnf install epel-release -y
 

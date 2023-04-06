@@ -2,6 +2,8 @@
 # 03/04/23
 # Ce script va installer et configurer la solution MongoDB sur la machine.
 
+sudo dnf -y install python
+
 # installation of MongoDB
 sudo mv ~/mongodb/mongodb-org-6.0.repo /etc/yum.repos.d/
 sudo yum install -y mongodb-org
