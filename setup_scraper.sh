@@ -39,5 +39,5 @@ echo $nameUserMongoDB
 sudo systemctl start scraper
 
 current_date=$(date +"%m_%d_%y_data.json")
-sudo scp -r /opt/scraper/$current_date $nameUserMongoDB@10.101.1.10:/home/$nameUserMongoDB/mongodb
-ssh -t $nameUserMongoDB@10.101.1.10 "mongoimport --host localhost -u mongoadmin -p azerty --authenticationDatabase admin --db scraper --collection listGames --file /home/$nameUserMongoDB/$current_date --jsonArray"
+sudo scp -r /opt/scraper/scraper_data/$current_date $nameUserMongoDB@10.101.1.10:/home/$nameUserMongoDB/mongodb
+ssh -t $nameUserMongoDB@10.101.1.10 "mongoimport --host localhost -u mongoadmin -p azerty --authenticationDatabase admin --db scraper --collection listGames --file /home/$nameUserMongoDB/mongodb/$current_date --jsonArray"
