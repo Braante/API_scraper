@@ -30,6 +30,7 @@ sudo systemctl daemon-reload
 # /up/  PARFAIT ! /up/
 
 mongosh < ~/mongodb/mongo.js
+sudo systemctl restart mongod
 sudo systemctl start netdata
 sudo systemctl enable netdata
 
