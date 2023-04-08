@@ -15,6 +15,8 @@
 #  directement.
 #  Les machines doivent avoir un accès réseau en NAT & en réseau privé hôte.
 #
+#  Pour avoir moins de mot de passe à rentrer, vous pouvez copiez vos clés ssh de votre machine hôte sur les 4 machines.
+#
 #  #############################################################################################  #
 
 
