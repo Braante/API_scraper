@@ -1,4 +1,4 @@
-# The Scraper porject
+# The Scraper project
 
 ## What is this ?
 
@@ -24,7 +24,7 @@ Before the installation :
 The installation :
 - In API_scraper directory, you only need to run the script
     - `sh project_launch.sh`
-- the name of the users of the machines at the beginning
+- the name of the users of the machines when requested
 - put the password of your machines if requested
 
 Accessing the API on : 10.101.1.40:5000 by default (add /help for all requests possibles.)
@@ -37,6 +37,12 @@ Accessing the API on : 10.101.1.40:5000 by default (add /help for all requests p
     > For restore data, you can use this command on backup machine : `borg extract --dry-run -v --list backup_data/::[m_d_y]` with the correct information date.
 
     > For more information on backup, you can use this command on backup machine : `borg info /backup_data::[m_d_y]` with the correct information date.
+
+- Update data now
+    > If you want to update the data on the api at the moment without waiting automatic launch (at 4 am by default). You can launch `import_data.sh` in mongodb machine and after launch `scraper.sh` on scraper machine.
+
+- Monitoring (NetData)
+    > You can access on all machines at NetData Website interface on IP:19999
 
 ---
 
