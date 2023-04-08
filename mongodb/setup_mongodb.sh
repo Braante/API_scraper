@@ -37,4 +37,5 @@ sudo systemctl enable netdata
 # Ajustement du firewall
 sudo firewall-cmd --add-port=19999/tcp --permanent
 sudo firewall-cmd --add-port=60000/tcp --permanent
+sudo firewall-cmd --add-port=27017/tcp --permanent
 sudo firewall-cmd --reload

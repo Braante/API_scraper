@@ -25,7 +25,7 @@ echo "$nameUserMongoDB" > ./mongodb/name.txt
 echo "Quel est le nom de l'utilisateur sur la machine backup ?"
 read nameUserBackup
 echo "$nameUserBackup" > ./mongodb/name_backup.txt
-sudo scp -r ./mongodb $nameUserMongoDB@10.101.1.10:/home/$nameUserMongoDB/
+sudo scp -r ./mongodb $nameUserMongoDB@10.101.1.10:/opt/mongodb/
 
 echo "Quel est le nom de l'utilisateur sur la machine scraper ?"
 read nameUserScraper
