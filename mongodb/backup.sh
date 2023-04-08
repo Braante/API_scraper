@@ -4,5 +4,5 @@
 
 cd ~/
 current_date=$(date +"%m_%d_%y")
-name=`cat ~/name_backup.txt`
+name=`cat ~/mongodb/name_backup.txt`
 borg create --stats --progress $name@10.101.1.30:/home/$name/backup_data::$current_date /home/$name/

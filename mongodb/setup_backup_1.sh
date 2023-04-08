@@ -26,7 +26,7 @@ sudo mv ~/mongodb/backup.service /etc/systemd/system/
 sudo mv ~/mongodb/backup.timer /etc/systemd/system/
 sudo mkdir /opt/backup
 sudo mv ~/mongodb/backup.sh /opt/backup/
-sudo mv ~/mongodb/name_backup.txt /opt/mongodb/
+sudo cp ~/mongodb/name_backup.txt /opt/mongodb/
 
 # activation (aussi dès le démarrage) du service et du timer
 sudo systemctl start backup.timer
